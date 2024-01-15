@@ -1,13 +1,12 @@
-import express, {Request, Response} from 'express';
-import fetch from 'node-fetch';
-import City from '..'
+var express = require('express');
 var router = express.Router();
 
+const fetch = require('node-fetch');
 const City = require('../models/cities');
 
 const OWM_API_KEY = '153be68d1a9792c59bf97e9aab6212d6';
 
-router.post('/', (req: Request, res: Response) => {
+router.post('/', (req, res) => {
 	// Check if the city has not already been added
 	City.findOne({ cityName: { $regex: new RegExp(req.body.cityName, 'i') } }).then(dbData => {
 		if (dbData === null) {
@@ -42,7 +41,7 @@ router.get('/', (req, res) => {
 	});
 });
 
-router.get("/:cityName", (req: Request, res) => {
+router.get("/:cityName", (req, res) => {
   City.findOne({
     cityName: { $regex: new RegExp(req.params.cityName, "i") },
   }).then(data => {
@@ -54,8 +53,20 @@ router.get("/:cityName", (req: Request, res) => {
   });
 });
 
-export default router
+router.delete("/:cityName", (req, res) => {
+  City.deleteOne({
+    cityName: { $regex: new RegExp(req.params.cityName, "i") },
+  }).then(deletedDoc => {
+    if (deletedDoc.deletedCount > 0) {
+      // document successfully deleted
+      City.find().then(data => {
+        res.json({ result: true, weather: data });
+      });
+    } else {
+      res.json({ result: false, error: "City not found" });
+    }
+  });
+});
 
-// 1.terminer la convertion jsx ave tsx 
-// 2.tester dans thunderRequest le bon fonctionnement
-// 3.vérifier les intitulé du temps pour les images requises
+module.exports = router;
+
