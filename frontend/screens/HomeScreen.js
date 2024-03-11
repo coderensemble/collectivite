@@ -2,7 +2,7 @@ import { SafeAreaView, StyleSheet, Dimensions, View, Text, TouchableOpacity } fr
 import { Classe } from "../Components/Classe";
 import { Meteo } from "../Components/Meteo";
 import { DayCard } from "../Components/DayCard";
-import MainContainer from "../../../../Formation/La_Capsule-Developpeur_web_et_mobile/Bootcamp/DressMeUP/dressMeUp-frontend/Components/css/MainContainer";
+import  AgendaScreen  from "./AgendaScreen"
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -25,7 +25,7 @@ export default function HomeScreen({ navigation }) {
         <View>
           <DayCard />
         </View>
-        <TouchableOpacity style={styles.customButton} onPress={() => navigation.navigate("Agenda")}>
+        <TouchableOpacity style={styles.customButton} onPress={() => navigation.navigate("AgendaScreen")}>
           <Text style={styles.buttonText}>Agenda</Text>
         </TouchableOpacity>
       </View>

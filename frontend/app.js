@@ -14,7 +14,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import user from "./reducers/user";
 //import des différents screens
 import HomeScreen from "./screens/HomeScreen";
-
+import AgendaScreen from "./screens/AgendaScreen";
 
 const fetchFonts = async () => {
   await Font.loadAsync({
@@ -23,9 +23,6 @@ const fetchFonts = async () => {
 };
 
 LogBox.ignoreAllLogs();
-
-
-
 
 const reducers = combineReducers({ user });
 const persistConfig = { key: "Collectivites", storage };
