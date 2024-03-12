@@ -1,3 +1,4 @@
+
 import { SafeAreaView, StyleSheet, Dimensions, View, Text, TouchableOpacity } from "react-native";
 import { Classe } from "../Components/Classe";
 import { Meteo } from "../Components/Meteo";
@@ -8,6 +9,9 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 export default function HomeScreen({ navigation }) {
+  const handleAgendaPress = () => {
+    navigation.navigate("AgendaScreen");
+  };
   return (
     <SafeAreaView style={styles.body}>
       <View style={styles.mainContainer}>
@@ -25,7 +29,7 @@ export default function HomeScreen({ navigation }) {
         <View>
           <DayCard />
         </View>
-        <TouchableOpacity style={styles.customButton} onPress={() => navigation.navigate("AgendaScreen")}>
+        <TouchableOpacity style={styles.customButton} onPress={handleAgendaPress}>
           <Text style={styles.buttonText}>Agenda</Text>
         </TouchableOpacity>
       </View>

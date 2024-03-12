@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { LogBox } from "react-native";
+
 //import de la navigation par lien
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 //importer les polices nescessaires
 import * as Font from "expo-font";
+
+const fetchFonts = async () => {
+  await Font.loadAsync({
+    "MavenPro": require("./assets/fonts/MavenPro-VariableFont_wght.ttf")
+  });
+};
+
 //Store persistant et reducers
 import { Provider } from "react-redux";
 import { persistStore, persistReducer } from "redux-persist";
@@ -12,15 +21,11 @@ import { PersistGate } from "redux-persist/integration/react";
 import storage from 'redux-persist/lib/storage';
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import user from "./reducers/user";
+
 //import des différents screens
 import HomeScreen from "./screens/HomeScreen";
 import AgendaScreen from "./screens/AgendaScreen";
 
-const fetchFonts = async () => {
-  await Font.loadAsync({
-    "MavenPro": require("./assets/fonts/MavenPro-VariableFont_wght.ttf")
-  });
-};
 
 LogBox.ignoreAllLogs();
 
@@ -59,6 +64,7 @@ export default function App() {
           <NavigationContainer>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
               <Stack.Screen name="HomeScreen" component={HomeScreen} />
+              <Stack.Screen name="AgendaScreen" component={AgendaScreen} />
             </Stack.Navigator>
           </NavigationContainer>
         </PersistGate>
